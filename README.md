@@ -14,4 +14,5 @@
 -- Export feature\
 -- Drag and Drop feature\
 -- Tooltip libraries\
+-- Compression of file before transmitting
 -- more advanced libraries like react-query, redux etc
