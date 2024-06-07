@@ -36,6 +36,7 @@ const UploadCSV = () => {
   const handleClick = () => {
     console.log(file);
     if (file) {
+      setSuccess("importing...");
       uploadFileAPI();
     } else {
       setError("Please Select File");
@@ -63,7 +64,13 @@ const UploadCSV = () => {
       </div>
       {error ? <div className="text-red-400 capitalize">{error}</div> : ""}
       {success ? (
-        <div className="text-green-400 capitalize">{success}</div>
+        <div
+          className={`${
+            success === "importing..." ? "text-yellow-400" : "text-green-400"
+          } capitalize`}
+        >
+          {success}
+        </div>
       ) : (
         ""
       )}
