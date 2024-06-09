@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { instance } from "../utils/AsioxInstance";
+import ShowTable from "../component/ShowTable";
 
 const UploadCSV = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [data, setData] = useState([]);
   const setInputFieldtoNull = () => {
     const input_id = document.getElementById("csvFileInput");
     input_id.value = null;
@@ -19,7 +21,8 @@ const UploadCSV = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      setSuccess(response.data);
+      setSuccess("Uploaded Successfully");
+      setData(response.data);
       setError(false);
     } catch (e) {
       setError("Something Went Wrong, Try Again");
@@ -31,12 +34,13 @@ const UploadCSV = () => {
     setFile(e.target.files[0]);
     setError(false);
     setSuccess(false);
+    setData([]);
   };
 
   const handleClick = () => {
-    console.log(file);
     if (file) {
       setSuccess("importing...");
+
       uploadFileAPI();
     } else {
       setError("Please Select File");
@@ -74,6 +78,7 @@ const UploadCSV = () => {
       ) : (
         ""
       )}
+      <ShowTable data={data} />
     </div>
   );
 };
